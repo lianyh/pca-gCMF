@@ -2,110 +2,52 @@ library(CMF)
 library(pROC)
 library(data.table)
 
-
 args<-commandArgs(TRUE)
 if(length(args) < 7) {
   args <- c("--help")
 }
-1
 library(CMF)
-2
 library(pROC)
-3
 library(data.table)
-4
-​
-5
-​
-6
 args<-commandArgs(TRUE)
-7
 if(length(args) < 7) {
-8
   args <- c("--help")
-9
 }
-10
 ## Help section
-11
 if("--help" %in% args) {
-12
   cat("
-13
       The R Script
-14
- 
-15
       Arguments:
-16
       --arg1 = Known SL Matrix (gene * gene)   - a file
-17
       --arg2 = Test Set - SL Matrix (gene * gene) - a file
-18
       --arg3 = Transformed (PCA) Essentiality Profile (366 * 30)    - a file
-19
       --arg4 = Transformed (PCA) Pairwise Coexpr Profile (366 * 192)    - a file
-20
       --arg5 = Raw RNA Expression Profile (366 * 1100)    - a file
-21
       --arg6 = Transformed (PCA) SCNA Profile (366 * 500)    - a file
-22
       --arg7 = outputFolder/    - folder path ended with /
-23
-      --help             
-24
- 
-25
+      --help     
+
       Example:
-26
       ./pca-gCMF.R --arg1=F1_F2_F3_SL_binary_all --arg2=F1_SL_binary_test --arg3=F1_F2_F3_essentiality_pca --arg4=F1_F2_F3_pairwisecoexpr_pca192 --arg5=data_RNA_expression_alltraintest --arg6=data_linear_CNA_alltraintest_pca --arg7=outputFolder/ \n\n")
-27
- 
-28
   q(save="no")
-29
 }
-30
 SL_binary_all=args[1]
-31
 test_set=args[2]
-32
 essentiality_pca_all=args[3]
-33
 pairwisecoexpr_pca_all=args[4]
-34
 raw_data_RNA_expression=args[5]
-35
 sca_pca_all=args[6]
-36
 out=args[7]
-37
-​
-38
 if (!(file.exists(out)))
-39
 {
-40
         dir.create(out)
-41
 } 
-42
-​
-43
 triplets=list()
-44
 X=list()
-45
 F1_F2_F3_SL_binary_all=read.table(SL_binary_all,sep="\t")
-46
 F1_F2_F3_SL_binary_all=as.matrix(F1_F2_F3_SL_binary_all)
-47
 colcount1=ncol(F1_F2_F3_SL_binary_all)
-48
-​
-49
 X[[1]]<-matrix(F1_F2_F3_SL_binary_all,nrow=colcount1,ncol=colcount1)
-50
 triplets[[1]]=matrix_to_triplets(X[[1]])
 
 ## Help section
