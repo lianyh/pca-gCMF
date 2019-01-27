@@ -13,42 +13,6 @@ args<-commandArgs(TRUE)
 if(length(args) < 7) {
   args <- c("--help")
 }
-## Help section
-if("--help" %in% args) {
-  cat("
-      The R Script
-      Arguments:
-      --arg1 = Known SL Matrix (gene * gene)   - a file
-      --arg2 = Test Set - SL Matrix (gene * gene) - a file
-      --arg3 = Transformed (PCA) Essentiality Profile (366 * 30)    - a file
-      --arg4 = Transformed (PCA) Pairwise Coexpr Profile (366 * 192)    - a file
-      --arg5 = Raw RNA Expression Profile (366 * 1100)    - a file
-      --arg6 = Transformed (PCA) SCNA Profile (366 * 500)    - a file
-      --arg7 = outputFolder/    - folder path ended with /
-      --help     
-
-      Example:
-      ./pca-gCMF.R --arg1=F1_F2_F3_SL_binary_all --arg2=F1_SL_binary_test --arg3=F1_F2_F3_essentiality_pca --arg4=F1_F2_F3_pairwisecoexpr_pca192 --arg5=data_RNA_expression_alltraintest --arg6=data_linear_CNA_alltraintest_pca --arg7=outputFolder/ \n\n")
-  q(save="no")
-}
-SL_binary_all=args[1]
-test_set=args[2]
-essentiality_pca_all=args[3]
-pairwisecoexpr_pca_all=args[4]
-raw_data_RNA_expression=args[5]
-sca_pca_all=args[6]
-out=args[7]
-if (!(file.exists(out)))
-{
-        dir.create(out)
-} 
-triplets=list()
-X=list()
-F1_F2_F3_SL_binary_all=read.table(SL_binary_all,sep="\t")
-F1_F2_F3_SL_binary_all=as.matrix(F1_F2_F3_SL_binary_all)
-colcount1=ncol(F1_F2_F3_SL_binary_all)
-X[[1]]<-matrix(F1_F2_F3_SL_binary_all,nrow=colcount1,ncol=colcount1)
-triplets[[1]]=matrix_to_triplets(X[[1]])
 
 ## Help section
 if("--help" %in% args) {
