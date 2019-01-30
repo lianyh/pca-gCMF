@@ -1,4 +1,4 @@
-#Prerequisite
+# Prerequisite
 -------------------------------------------------------------------------------
 Please install R library of:
 library(CMF)
@@ -8,7 +8,7 @@ library('igraph')
 library('sna')
 
 
-#pca-gCMF
+# pca-gCMF
 ---------------------------------------------------------------------------------
 Command to run pca-gCMF:
 
