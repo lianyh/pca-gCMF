@@ -4,8 +4,8 @@ Please install R library of:
 library(CMF)
 library(pROC)
 library(data.table)
-library('igraph')
-library('sna')
+library(igraph)
+library(sna)
 
 
 # pca-gCMF
