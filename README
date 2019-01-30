@@ -11,13 +11,13 @@ library(sna)
 # pca-gCMF
 --------------------------------
 Command to run pca-gCMF:
-Rscript pca-gCMF.R matrix_list_pca.txt data/dat1/ outputFolder/
+Rscript pca_gCMF.R matrix_list_pca.txt data/dat1/ outputFolder/
 
 
 # gr-gCMF
 --------------------------------
 Command to run gr-gCMF:
-Rscript gr-gCMF.R matrix_list_gb.txt data/dat2/ outputFolder/
+Rscript gr_gCMF.R matrix_list_gb.txt data/dat2/ outputFolder/
 
 # CMF-W
 --------------------------------
