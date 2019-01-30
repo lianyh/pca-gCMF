@@ -1,5 +1,5 @@
-# Prerequisite
--------------------------------------------------------------------------------
+# *Prerequisite*
+
 Please install R library of:
 library(CMF)
 library(pROC)
