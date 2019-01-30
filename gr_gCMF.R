@@ -20,7 +20,7 @@ if("--help" %in% args) {
       --help             
  
       Example:
-      ./pca-gCMF.R --arg1=matrix_list_gb.txt --arg2=dat2/ --arg3=outputFolder/ \n\n
+      ./gr-gCMF.R --arg1=matrix_list_gb.txt --arg2=dat2/ --arg3=outputFolder/ \n\n
 
       Notes: In argument 1, please list the matrix meant for prediction (test set) in the first row and \n \t \t its related full matrix for training in the second row. \n
       In argument 1, the second column indicates whether a matrix required graph-based features transformation {1,0}, \n \t \t separated by tab.\n
