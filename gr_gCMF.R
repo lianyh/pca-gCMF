@@ -1,7 +1,8 @@
 library(CMF)
 library(pROC)
 library(data.table)
-
+library('igraph')
+library('sna')
 
 args<-commandArgs(TRUE)
 if(length(args) < 3) {
@@ -19,10 +20,10 @@ if("--help" %in% args) {
       --help             
  
       Example:
-      ./pca-gCMF.R --arg1=matrix_list_pca.txt --arg2=dat1/ --arg3=outputFolder/ \n\n
+      ./pca-gCMF.R --arg1=matrix_list_gb.txt --arg2=dat2/ --arg3=outputFolder/ \n\n
 
       Notes: In argument 1, please list the matrix meant for prediction (test set) in the first row and \n \t \t its related full matrix for training in the second row. \n
-      In argument 1, the second column indicates whether a matrix required PCA transformation {1,0}, \n \t \t separated by tab.\n
+      In argument 1, the second column indicates whether a matrix required graph-based features transformation {1,0}, \n \t \t separated by tab.\n
       In argument 1, the third and fourth column indicate entity type, separated by tab, i.e. 1   2.\n\n
       ")
   q(save="no")
@@ -100,22 +101,49 @@ if(!is.na(fields[1]))
 {
 	inds[i-1,]=c(as.numeric(strsplit(linn[i], '\t') [[1]][3]),as.numeric(strsplit(linn[i], '\t') [[1]][4]))
 	likelihood[i-1]="gaussian"
-
+	print("fields 1")
+	print(fields[1])
 	#ADDED ESSENTIALITY
 	exprfeatures=read.table(fields[1],sep="\t",header=0)
 	colcount2=ncol(exprfeatures)
 	countList[[i-1]]=colcount2
-	isPCA = fields[2]
-		if (isPCA == 1)
+	isGP = fields[2]
+		if (isGP == 1)
 		{
-			 train1=as.matrix(exprfeatures)
-			 pca=prcomp(train1)
-			 pcasummary=summary(pca)$importance[3,]
-			 pc_keep_len=length(pcasummary[pcasummary<0.99]) #proportion of the variance explained=0.99
-			 pca_retain=pca$x[,1:pc_keep_len]
-			 countList[[i-1]]=pc_keep_len
+			 tableMatrix=as.matrix(exprfeatures)
 
-			 X[[i-1]]=matrix(as.matrix(pca_retain),nrow=nrow(pca_retain),ncol=ncol(pca_retain))
+			 gTable=matrix(tableMatrix,nrow=nrow(tableMatrix),ncol=ncol(tableMatrix))
+			
+			 deg=degree(gTable, gmode="graph")
+			 gDeg=as.matrix(deg,ncol=1)
+
+			 tt=closeness(gTable,gmode="graph")
+			 gCloness=as.matrix(tt,ncol=1)
+			 
+			 tt=betweenness(gTable,gmode="graph")
+			 gBetweenness=as.matrix(tt,ncol=1)
+
+			 tt=stresscent(gTable,gmode="graph")
+			 gStressCent=as.matrix(tt,ncol=1)
+
+			 tt=infocent(gTable,gmode="graph")
+			 gInfoCent=as.matrix(tt,ncol=1)
+
+			 tt=evcent(gTable, gmode="graph")
+			 gEvCent=as.matrix(tt,ncol=1)
+
+			 tt=gilschmidt(gTable, gmode="graph")
+			 gGilSchmidt=as.matrix(tt,ncol=1)
+
+			 tt=flowbet(gTable, gmode="graph")
+			 gFlowBet=as.matrix(tt,ncol=1)
+
+			 graphFeatures=cbind(gDeg,gCloness,gBetweenness,gStressCent,gInfoCent,gEvCent,gGilSchmidt,gFlowBet)
+
+			 pca_retain=ncol(graphFeatures)
+			 countList[[i-1]]=pca_retain
+
+			 X[[i-1]]=matrix(as.matrix(graphFeatures),nrow=nrow(tableMatrix),ncol=ncol(graphFeatures))
 			 triplets[[i-1]]=matrix_to_triplets(X[[i-1]])
 			 m2<- data.table(triplets[[i-1]])
 			 test[[i-1]]=triplets[[i-1]][m2[,V1] %in% myIndex,]
@@ -168,5 +196,5 @@ AUC1 <- auc(ROC1)
 
 print("AUC")
 print(AUC1)
-write.table(temp_results,file=paste(outFolder,"gcmf_pca_based_prediction_results",sep="/"),sep="\t",row.names=FALSE,col.names=FALSE)
+write.table(temp_results,file=paste(outFolder,"gcmf_graph_based_prediction_results",sep="/"),sep="\t",row.names=FALSE,col.names=FALSE)
 cat("\n")
