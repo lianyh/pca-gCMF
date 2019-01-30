@@ -1,3 +1,14 @@
+Prerequisite:
+Please install R library of:
+library(CMF)
+library(pROC)
+library(data.table)
+library('igraph')
+library('sna')
+
+
+pca-gCMF
+=====================================
 Command to run pca-gCMF:
 
 Rscript pca-gCMF.R data/F1_F2_F3_SL_binary_all data/F1_SL_binary_test data/F1_F2_F3_essentiality_pca data/F1_F2_F3_pairwisecoexpr_pca192 data/data_RNA_expression_alltraintest data/data_linear_CNA_alltraintest_pca ./outputFolder/
