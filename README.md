@@ -21,6 +21,6 @@ Rscript pca_gCMF.R matrix_list_pca.txt data/ outputFolder/<br/>
             3rd column: entity type corresponds to the row in the matrix (entity type row index).<br/>
             4th column: entity type corresponds to the column in the matrix (entity type column index).<br/>
 2nd input: folder contains a list of files listed in the first argument<br/>
-3rd input: your output folder ended with slash / <br/><br/>
+3rd input: your output folder ended with slash / <br/>
 
-All columns are separated by tab delimited.<br/><br/>
+All columns are separated by tab delimited.<br/>
