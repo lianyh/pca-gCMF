@@ -23,7 +23,7 @@ Rscript gr_gCMF.R matrix_list_gb.txt data/dat2/ outputFolder/
 # CMF-W
 --------------------------------
 Command to run CMF-W
-python cmfw.py data/dat3/F1_F2_SL_binary data/dat3/F1_F2_coexpr data/dat3/F1_F2_me data/dat3/F1_F2_pathway data/dat3/F1_F2_ppi data/dat3/F1_F2_protcomplex data/dat3/F1_F2_index_for_train data/dat3/F3_index_for_test 366 
+python cmfw.py data/dat3/F1_F2_SL_binary data/dat3/F1_F2_coexpr data/dat3/F1_F2_me data/dat3/F1_F2_pathway data/dat3/F1_F2_ppi data/dat3/F1_F2_protcomplex data/dat3/F1_F2_index_for_train data/dat3/F3_index_for_test 332 
 
 Notes: 366 is the row counts of any identical matrices
 
