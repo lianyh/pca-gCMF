@@ -1,3 +1,6 @@
+# pca-gCMF
+
+-----------
 # *Prerequisite*
 -------------------------------
 Please install R library:
@@ -8,8 +11,7 @@ library(igraph)
 library(sna)
 
 
-# pca-gCMF
+Command
 --------------------------------
-Command to run pca-gCMF:
 Rscript pca_gCMF.R matrix_list_pca.txt data/ outputFolder/
 
