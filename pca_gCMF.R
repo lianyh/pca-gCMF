@@ -58,6 +58,8 @@ inds[1,]=c(as.numeric(strsplit(linn[1], '\t') [[1]][3]),as.numeric(strsplit(linn
 triplets=list()
 X=list()
 F1_F2_F3_SL_binary_all=read.table(paste(input,train_set,sep="/"),sep="\t",header=0)
+#replace NA with 0
+F1_F2_F3_SL_binary_all[is.na(F1_F2_F3_SL_binary_all)] <- 0
 F1_F2_F3_SL_binary_all=as.matrix(F1_F2_F3_SL_binary_all)
 countList[[1]]=ncol(F1_F2_F3_SL_binary_all)
 
