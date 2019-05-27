@@ -1,6 +1,6 @@
 # *Prerequisite*
 -------------------------------
-Please install R library of:
+Please install R library:
 library(CMF)
 library(pROC)
 library(data.table)
