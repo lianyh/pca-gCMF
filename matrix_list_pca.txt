@@ -1,4 +1,4 @@
-F3_SL_binary_test 0 1 1
+F3_SL_binary_test	0	1	1
 F1_F2_F3_SL_binary_all	0	1	1
 F1_F2_F3_coexpr_matrix	1	1	2
 F1_F2_F3_me_matrix	1	1	3
