@@ -106,7 +106,7 @@ if(!is.na(fields[1]))
 	likelihood[i-1]="gaussian"
 
 	#ADDED ESSENTIALITY
-	exprfeatures=read.table(fields[1],sep="\t",header=0)
+	exprfeatures=read.table(paste(input,fields[1],sep="/"),sep="\t",header=0)
 	#replace NA with 0
 	exprfeatures[is.na(exprfeatures)] <- 0
 	colcount2=ncol(exprfeatures)
