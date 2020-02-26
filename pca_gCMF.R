@@ -58,8 +58,6 @@ inds[1,]=c(as.numeric(strsplit(linn[1], '\t') [[1]][3]),as.numeric(strsplit(linn
 triplets=list()
 X=list()
 F1_F2_F3_SL_binary_all=read.table(paste(input,train_set,sep="/"),sep="\t",header=0)
-#replace NA with 0
-F1_F2_F3_SL_binary_all[is.na(F1_F2_F3_SL_binary_all)] <- 0
 F1_F2_F3_SL_binary_all=as.matrix(F1_F2_F3_SL_binary_all)
 countList[[1]]=ncol(F1_F2_F3_SL_binary_all)
 
@@ -109,6 +107,8 @@ if(!is.na(fields[1]))
 
 	#ADDED ESSENTIALITY
 	exprfeatures=read.table(fields[1],sep="\t",header=0)
+	#replace NA with 0
+	exprfeatures[is.na(exprfeatures)] <- 0
 	colcount2=ncol(exprfeatures)
 	countList[[i-1]]=colcount2
 	isPCA = fields[2]
@@ -117,8 +117,8 @@ if(!is.na(fields[1]))
 			 train1=as.matrix(exprfeatures)
 			 pca=prcomp(train1)
 			 pcasummary=summary(pca)$importance[3,]
-			 pc_keep_len=length(pcasummary[pcasummary<0.99]) #proportion of the variance explained=0.99
-			 pca_retain=pca$x[,1:pc_keep_len]
+			 pc_keep_len=length(pcasummary[pcasummary<0.96]) #proportion of the variance explained=0.96
+			 pca_retain=as.matrix(pca$x[,1:pc_keep_len],ncol=pc_keep_len)
 			 countList[[i-1]]=pc_keep_len
 
 			 X[[i-1]]=matrix(as.matrix(pca_retain),nrow=nrow(pca_retain),ncol=ncol(pca_retain))
@@ -155,7 +155,8 @@ truth=triplets_test[[1]][,3]
 temp_testerr1=model$errors[1,1]
 temp_results=outm$out[[1]]
 
-for (i in 1:10) {
+K=2
+for (i in 1:1000) {
 	model <- CMF(train,inds,K,likelihood,D,test=test,opts=opts)
 	newmodelError=model$errors[1,1]
 	if (newmodelError < temp_testerr1)
