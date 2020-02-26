@@ -142,7 +142,7 @@ if(!is.na(fields[1]))
 }
 
 close(conn)
-
+K=2
 D=as.numeric(countList)
 opts <- getCMFopts()
 opts$iter.max <- 10 # Less iterations for faster computation
@@ -155,7 +155,7 @@ truth=triplets_test[[1]][,3]
 temp_testerr1=model$errors[1,1]
 temp_results=outm$out[[1]]
 
-K=2
+
 for (i in 1:1000) {
 	model <- CMF(train,inds,K,likelihood,D,test=test,opts=opts)
 	newmodelError=model$errors[1,1]
