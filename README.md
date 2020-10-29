@@ -24,3 +24,21 @@ data/ folder contains a list of files listed in the first argument<br/>
 outputFolder/ is your output folder ended with slash / <br/>
 
 All columns are separated by tab delimited.<br/>
+
+
+
+Citation
+--------------------------------
+If you find this useful for your research, we would be appreciated if you cite the following papers:
+
+@article{liany2020predicting,
+  title={Predicting synthetic lethal interactions using heterogeneous data sources},
+  author={Liany, Herty and Jeyasekharan, Anand and Rajan, Vaibhav},
+  journal={Bioinformatics},
+  volume={36},
+  number={7},
+  pages={2209--2216},
+  year={2020},
+  publisher={Oxford University Press}
+}
+
